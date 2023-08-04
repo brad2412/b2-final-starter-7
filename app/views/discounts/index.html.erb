@@ -1,0 +1,4 @@
+<h1>Bulk Discounts</h1>
+<% @discounts.each do |discount| %>
+  <p><%= link_to "#{discount.percentage_discount}% OFF", merchant_discount_path(@merchant, discount) %>: At least <%= discount.quantity_threshold %> of the same item is purchased.</p>
+<% end %>
