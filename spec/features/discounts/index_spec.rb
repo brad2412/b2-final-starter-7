@@ -21,6 +21,18 @@ describe "merchant discount index" do
     click_link("15% OFF")
     expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
   end
+
+    # US 2
+  it "should have a link to create a new discount" do
+    visit merchant_discounts_path(@merchant1)
+
+    expect(page). to have_link("Create Discount")
+    click_link("Create Discount")
+
+    expect(current_path).to eq(new_merchant_discount_path(@merchant1))
+  end
 end
+
+
 
 
