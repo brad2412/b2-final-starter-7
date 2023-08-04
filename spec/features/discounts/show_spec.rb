@@ -14,12 +14,9 @@ describe "merchant discounts show page" do
 
     expect(page).to have_content("Quantity Threshold: 10")
     expect(page).to have_content("Percentage Discount: 15")
+    expect(page).to_not have_content("Quantity Threshold: 15")
+    expect(page).to_not have_content("Percentage Discount: 25")
+    
   end
 end
 
-
-# 4: Merchant Bulk Discount Show
-
-# As a merchant
-# When I visit my bulk discount show page
-# Then I see the bulk discount's quantity threshold and percentage discount
