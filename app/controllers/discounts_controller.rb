@@ -27,6 +27,15 @@ class DiscountsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = @merchant.discounts.find(params[:id])
+    @discount.destroy
+
+    flash[:success] = "Discount deleted successfully!"
+    redirect_to merchant_discounts_path(@merchant)
+  end
   
   private
   
