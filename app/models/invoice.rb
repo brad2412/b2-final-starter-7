@@ -13,4 +13,20 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("unit_price * quantity")
   end
+
+  def total_revenue_discounted
+    total_discount = invoice_items.joins(item: { merchant: :discounts })
+                                  .where("discounts.quantity_threshold <= invoice_items.quantity")
+                                  .order("discounts.percentage_discount DESC")
+                                  .sum("discounts.percentage_discount * invoice_items.unit_price * invoice_items.quantity / 100.0")
+  
+    total_revenue - total_discount
+  end
+
+  def bulk_discount(invoice_item)
+    merchant = invoice_item.item.merchant
+    merchant.discounts.where("quantity_threshold <= ?", invoice_item.quantity)
+                            .order(percentage_discount: :desc)
+                            .first
+  end
 end
