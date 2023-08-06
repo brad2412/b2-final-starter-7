@@ -34,7 +34,6 @@ RSpec.describe "merchant discount index" do
   end
 
   # US 3
-  # US 3
   it "should have a delete function next to each discount" do
     visit merchant_discounts_path(@merchant1)
 
@@ -48,4 +47,21 @@ RSpec.describe "merchant discount index" do
     expect(page).to have_content("25% OFF: At least 15 of the same item is purchased.")
     
   end
+
+  #US 9
+  it "should have a header with an API showing the next 3 upcoming holidays" do
+    visit merchant_discounts_path(@merchant1)
+  
+    expect(page).to have_content("Next Three Holidays!")
+    expect(page).to have_content("Labour Day - 2023-09-04")
+    expect(page).to have_content("Columbus Day - 2023-10-09")
+    expect(page).to have_content("Veterans Day - 2023-11-10")
+    
+  end
 end
+
+
+
+
+
+
