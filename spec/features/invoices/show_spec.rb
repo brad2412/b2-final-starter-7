@@ -121,10 +121,3 @@ RSpec.describe "invoices show" do
     expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
   end
 end
-
-
-# 7: Merchant Invoice Show Page: Link to applied discounts
-
-# As a merchant
-# When I visit my merchant invoice show page
-# Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
