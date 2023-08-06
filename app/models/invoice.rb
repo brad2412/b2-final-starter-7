@@ -29,4 +29,5 @@ class Invoice < ApplicationRecord
                             .order(percentage_discount: :desc)
                             .first
   end
+
 end

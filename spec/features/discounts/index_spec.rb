@@ -49,16 +49,3 @@ RSpec.describe "merchant discount index" do
     
   end
 end
-
-# 3: Merchant Bulk Discount Delete
-
-# As a merchant
-# When I visit my bulk discounts index
-# Then next to each bulk discount I see a link to delete it
-# When I click this link
-# Then I am redirected back to the bulk discounts index page
-# And I no longer see the discount listed
-
-
-
-

@@ -35,7 +35,7 @@ RSpec.describe "invoices show" do
 
     @invoice_8 = Invoice.create!(customer_id: @customer_6.id, status: 1)
 
-    @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 10, unit_price: 10, status: 2)
+    @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 15, unit_price: 10, status: 2)
     @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 2)
     @ii_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_2.id, quantity: 2, unit_price: 8, status: 2)
     @ii_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_3.id, quantity: 3, unit_price: 5, status: 1)
@@ -106,10 +106,25 @@ RSpec.describe "invoices show" do
   # US 6
   it "should show total revenue with and without discounts" do
     visit merchant_invoice_path(@merchant1, @invoice_1)
-    save_and_open_page
+    # save_and_open_page
     expect(page).to have_content(@invoice_1.total_revenue)
-    expected_discounted_revenue = @invoice_1.total_revenue_discounted
-    expect(page).to have_content(expected_discounted_revenue)
+    expect(page).to have_content("Total Revenue After Discounts:")
+    expect(page).to have_content(@invoice_1.total_revenue_discounted)
   end
-
+  
+  # US 7
+  it "should have a link to the discounts show page that was applied" do
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+    # save_and_open_page
+    expect(page).to have_link("15% OFF")
+    click_link("15% OFF")
+    expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
+  end
 end
+
+
+# 7: Merchant Invoice Show Page: Link to applied discounts
+
+# As a merchant
+# When I visit my merchant invoice show page
+# Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
