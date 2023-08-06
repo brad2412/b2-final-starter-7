@@ -1,5 +1,15 @@
 <h1>Bulk Discounts</h1>
 
+<section id="holidays">
+<h3> Next Three Holidays!</h3>
+  <% @holidays.each do |holiday| %>
+    <b><%= holiday["name"] %></b> - <%= holiday["date"] %><br>
+  <% end %>
+</section>
+<br/>
+<br/>
+<br/>
+
 <%= link_to "Create Discount", new_merchant_discount_path(@merchant) %>
 
 <% @discounts.each do |discount| %>
